@@ -118,14 +118,14 @@ const projects = [
     tools: ["Product Strategy", "Web3", "Governance", "Proof of Humanity"],
   },
   {
-    title: "Operations Data Dashboard",
-    status: "Portfolio direction",
-    href: "/operations-dashboard.html",
+    title: "GoQC",
+    status: "Local events app",
+    href: "https://play.google.com/apps/internaltest/4701591183248615204",
     problem:
-      "Operational performance is easier to improve when teams can see service, productivity, and exceptions clearly.",
+      "No user friendly events aggregator nearby.",
     build:
-      "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
-    tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
+      "Automates nearby event aggregation. Events can also be manually inputted for promotions.",
+    tools: ["React", "Typescript", "AI", "JS"],
   },
   {
     title: "The Outsourced Mind",
@@ -137,15 +137,15 @@ const projects = [
       "A research paper demonstrating why AI needs to be safely implemented to prevent loss of human agency",
     tools: ["Research", "Writing", "AI", "Education"],
   },
-  {
-    title: "GoQC",
-    status: "Local events app",
-    href: "https://play.google.com/apps/internaltest/4701591183248615204",
+    {
+    title: "Operations Data Dashboard",
+    status: "Portfolio direction",
+    href: "/operations-dashboard.html",
     problem:
-      "No user friendly events aggregator nearby.",
+      "Operational performance is easier to improve when teams can see service, productivity, and exceptions clearly.",
     build:
-      "Automates nearby event aggregation. Events can also be manually inputted for promotions.",
-    tools: ["React", "Typescript", "AI", "JS"],
+      "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
+    tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
   },
 ];
 
@@ -222,6 +222,13 @@ const research = [
     title: "Stacks / Bitcoin Ecosystem",
     body: "A project-level review combining technology, team, use case, market fit, and ecosystem direction.",
     href: "/writings/stacks-bitcoin-ecosystem.pdf",
+  },
+  {
+    category: "Crypto",
+    label: "Newsletters",
+    title: "Past Newsletter Examples",
+    body: "My newsletter sections taken from previous weekly newsletters while working with PersonaFi.",
+    href: "/writings/newsletter-examples.pdf",
   },
   {
     category: "Security",
