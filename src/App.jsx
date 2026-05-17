@@ -102,12 +102,12 @@ const projects = [
     tools: ["Product Strategy", "Web3", "Governance", "Proof of Humanity"],
   },
   {
-  title: "Operations Data Dashboard",
-  status: "Portfolio direction",
-  href: "/operations-dashboard.html",
-  problem: "Operational performance is easier to improve when teams can see service, productivity, and exceptions clearly.",
-  build: "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
-  tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
+    title: "Operations Data Dashboard",
+    status: "Portfolio direction",
+    href: "/operations-dashboard.html",
+    problem: "Operational performance is easier to improve when teams can see service, productivity, and exceptions clearly.",
+    build: "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
+    tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
   },
   {
     title: "Crypto Research Library",
@@ -386,7 +386,14 @@ function ProjectsSection() {
       <SectionHeading eyebrow="Selected Projects" title="Make the site feel like a builder portfolio." body="These cards turn ideas, research, dashboards, and automations into visible proof that you can move from concept to execution." />
       <div className="grid gap-5 md:grid-cols-2">
         {projects.map((project, index) => (
-          <motion.article key={project.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.35, delay: index * 0.05 }} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-900/10">
+          <motion.article
+            key={project.title}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.35, delay: index * 0.05 }}
+            onClick={() => project.href && (window.location.href = project.href)}
+            className={`rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-900/10 ${project.href ? "cursor-pointer" : ""}`}>
             <div className="mb-5 flex items-start justify-between gap-4">
               <div>
                 <p className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 inline-block">{project.status}</p>
