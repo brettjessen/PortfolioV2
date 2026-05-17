@@ -184,36 +184,42 @@ const research = [
     label: "AI + Society",
     title: "Charting the Future",
     body: "A leadership-focused look at AI, incentives, productivity, and how emerging technology may reshape work.",
+    href: "/writings/charting-the-future.pdf",
   },
   {
     category: "Market Analysis",
     label: "Market Analysis",
     title: "VC Fund Holdings",
     body: "Research framework for identifying institutional positioning, project narratives, and potential market signals.",
+    href: "/writings/vc-fund-holdings.pdf",
   },
   {
     category: "Crypto",
     label: "Project Research",
     title: "Stacks / Bitcoin Ecosystem",
     body: "A project-level review combining technology, team, use case, market fit, and ecosystem direction.",
+    href: "/writings/stacks-bitcoin-ecosystem.pdf",
   },
   {
     category: "Security",
     label: "Education",
     title: "Web3 Security 101",
     body: "A practical beginner guide to wallet safety, scams, risk management, and operational security.",
+    href: "/writings/web3-security-101.pdf",
   },
   {
     category: "Leadership",
     label: "Operations Thinking",
     title: "Execution Under Pressure",
     body: "Notes on accountability, supervisor development, communication, and translating goals into daily execution.",
+    href: "/writings/execution-under-pressure.pdf",
   },
   {
     category: "Crypto",
     label: "Digital Assets",
     title: "Narratives vs. Fundamentals",
     body: "A research lens for separating durable project value from short-term market attention and hype cycles.",
+    href: "/writings/narratives-vs-fundamentals.pdf",
   },
 ];
 
@@ -612,7 +618,7 @@ function ResearchSection() {
         <SectionHeading
           eyebrow="Research"
           title="A filterable research library."
-          body=""
+          body="Filter buttons make your writing feel like an organized knowledge base instead of a static article list."
         />
 
         <div className="mb-8 flex flex-wrap justify-center gap-2">
@@ -635,22 +641,41 @@ function ResearchSection() {
         <motion.div layout className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence>
             {filteredResearch.map((item) => (
-              <motion.article
+              <motion.a
                 key={item.title}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
                 layout
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.2 }}
-                className="group rounded-[2rem] border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10"
+                className="group block rounded-[2rem] border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10"
               >
                 <div className="mb-5 flex items-center justify-between gap-4">
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-800">{item.label}</span>
-                  <Icon name="external" className="h-5 w-5 text-slate-400 transition group-hover:text-blue-700" />
+                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-800">
+                    {item.label}
+                  </span>
+
+                  <Icon
+                    name="external"
+                    className="h-5 w-5 text-slate-400 transition group-hover:text-blue-700"
+                  />
                 </div>
-                <h3 className="text-xl font-black tracking-tight text-slate-950">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
-              </motion.article>
+
+                <h3 className="text-xl font-black tracking-tight text-slate-950">
+                  {item.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-slate-600">
+                  {item.body}
+                </p>
+
+                <p className="mt-5 text-sm font-bold text-blue-800">
+                  Open PDF →
+                </p>
+              </motion.a>
             ))}
           </AnimatePresence>
         </motion.div>
