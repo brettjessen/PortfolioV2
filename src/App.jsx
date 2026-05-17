@@ -137,13 +137,14 @@ const projects = [
     tools: ["Research", "Writing", "Web3", "Education"],
   },
   {
-    title: "Automation Experiments",
-    status: "Active learning lane",
+    title: "Local Events App",
+    status: "Currently in closed testing",
+    href: "https://play.google.com/apps/internaltest/4701591183248615204",
     problem:
-      "Small workflows waste time when data collection, reporting, and content tasks stay manual.",
+      "No user friendly events aggregator nearby.",
     build:
-      "Prototype automations using spreadsheets, scripts, AI tools, and web workflows to reduce repetitive effort.",
-    tools: ["Python", "VBA", "AI", "Workflow Design"],
+      "Prototype automates nearby event aggregation by scrapping the web. Events can also be manually inputted for promotions.",
+    tools: ["React", "Typescript", "AI", "JS"],
   },
 ];
 
