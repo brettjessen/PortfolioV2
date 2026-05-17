@@ -410,7 +410,7 @@ function VisitorSelector() {
       <SectionHeading
         eyebrow="Choose your lane"
         title="Different visitors need different proof."
-        body="This section makes the site feel more personal while helping recruiters, collaborators, Web3 readers, and builders find the most relevant message quickly."
+        body=""
       />
 
       <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
@@ -468,7 +468,7 @@ function ExperienceTimeline() {
         <SectionHeading
           eyebrow="Experience"
           title="An interactive career timeline."
-          body="Instead of a static résumé list, each role is framed as challenge, action, result, and transferable skills."
+          body="Instead of a static list, each role is framed as challenge, action, result, and transferable skills."
           dark
         />
 
@@ -539,9 +539,9 @@ function ProjectsSection() {
   return (
     <section id="projects" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
       <SectionHeading
-        eyebrow="Selected Projects"
-        title="Make the site feel like a builder portfolio."
-        body="These cards turn ideas, research, dashboards, and automations into visible proof that you can move from concept to execution."
+        eyebrow="Project Examples"
+        title="Here are some of my projects."
+        body="In my free-time I enjoy learning new skills and applying them to real world use cases."
       />
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -612,7 +612,7 @@ function ResearchSection() {
         <SectionHeading
           eyebrow="Research"
           title="A filterable research library."
-          body="Filter buttons make your writing feel like an organized knowledge base instead of a static article list."
+          body=""
         />
 
         <div className="mb-8 flex flex-wrap justify-center gap-2">
