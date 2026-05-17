@@ -1,6 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const LINKEDIN_URL = "https://www.linkedin.com/in/brettjessen";
+const GITHUB_URL = "https://www.github.com/brettjessen";
+const RESUME_URL = "/resume.pdf";
+
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
@@ -10,7 +14,7 @@ const navItems = [
 ];
 
 const metrics = [
-  { value: "15+", label: "Years in operations leadership" },
+  { value: "18+", label: "Years in operations leadership" },
   { value: "3,200+", label: "Users onboarded through Web3 launch" },
   { value: "500k", label: "Audience contribution in digital asset media" },
   { value: "4", label: "Core lanes: Ops, Data, Research, Tech" },
@@ -40,25 +44,25 @@ const visitorMessages = {
   recruiter: {
     label: "Recruiter",
     title: "Operational leader with measurable execution discipline.",
-    body: "Brett brings 15+ years of leadership experience, supervisor development, standards execution, compliance focus, and process improvement in high-pressure logistics environments.",
+    body: "18+ years of leadership experience, supervisor development, standards execution, compliance focus, and process improvement in high-pressure logistics environments.",
     proof: "Best fit: operations leadership, analytics-adjacent management, process improvement, and technology-forward team roles.",
   },
   collaborator: {
     label: "Collaborator",
     title: "A practical builder who can turn ideas into systems.",
-    body: "Brett combines execution, communication, systems thinking, and technical curiosity across operations, automation, Web3 research, and data-driven workflows.",
+    body: "Combine execution, communication, systems thinking, and technical curiosity across operations, automation, Web3 research, and data-driven workflows.",
     proof: "Best fit: early product concepts, automation workflows, research projects, local platforms, and emerging technology experiments.",
   },
   web3: {
     label: "Web3 Reader",
     title: "Responsible crypto research without the hype cycle.",
-    body: "Brett focuses on clear education, market structure, project research, token narratives, technical analysis, and separating signal from noise.",
+    body: "Focus on clear education, market structure, project research, token narratives, technical analysis, and separating signal from noise.",
     proof: "Best fit: project research, educational writing, community onboarding, market analysis, and long-form explainers.",
   },
   builder: {
     label: "Builder",
     title: "Self-directed learner moving from concept to implementation.",
-    body: "Brett studies tools, tests workflows, builds public projects, and uses AI, automation, and code to turn ideas into useful prototypes.",
+    body: "Study tools, test workflows, build public projects, and uses AI, automation, and code to turn ideas into useful prototypes.",
     proof: "Best fit: GitHub projects, portfolio builds, automation tools, dashboards, AI workflows, and product experiments.",
   },
 };
@@ -542,6 +546,12 @@ function App() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="#projects" className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-blue-800">View Projects <Icon name="arrowRight" className="ml-2 h-4 w-4" /></a>
               <a href="#experience" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-800">Explore Experience</a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-bold text-blue-800 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white"
+                >View Resume</a>
             </div>
           </motion.div>
           <SystemsMap />
