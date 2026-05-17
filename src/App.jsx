@@ -102,11 +102,12 @@ const projects = [
     tools: ["Product Strategy", "Web3", "Governance", "Proof of Humanity"],
   },
   {
-    title: "Operations Data Dashboard",
-    status: "Portfolio direction",
-    problem: "Operational performance is easier to improve when teams can see service, productivity, and exceptions clearly.",
-    build: "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
-    tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
+  title: "Operations Data Dashboard",
+  status: "Portfolio direction",
+  href: "/operations-dashboard.html",
+  problem: "Operational performance is easier to improve when teams can see service, productivity, and exceptions clearly.",
+  build: "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
+  tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
   },
   {
     title: "Crypto Research Library",
