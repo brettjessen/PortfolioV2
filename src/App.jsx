@@ -892,7 +892,6 @@ function App() {
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-200">Operating Principles</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight">Professional standards with builder energy.</h2>
               <p className="mt-5 text-base leading-8 text-blue-100">
-                This section adds personality without becoming informal. It tells visitors how you think, work, and evaluate opportunities.
               </p>
             </div>
 
@@ -917,10 +916,9 @@ function App() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">Contact</p>
             <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
-              Interested in leadership, research, or technical collaboration?
+              Interested in a leadership, research, or technical collaboration?
             </h2>
             <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">
-              Use this section to give visitors a clear next step. Keep it simple: email, LinkedIn, GitHub, resume, and selected writing.
             </p>
           </div>
 
