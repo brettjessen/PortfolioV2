@@ -130,6 +130,7 @@ const projects = [
   {
     title: "The Outsourced Mind",
     status: "Research on AI implementation",
+    href: "/writings/the-outsourced-mind.pdf",
     problem:
       "Society is significantly underestimating AI's implementation on society.",
     build:
@@ -183,16 +184,30 @@ const research = [
   {
     category: "AI",
     label: "AI + Society",
-    title: "Charting the Future",
-    body: "A leadership-focused look at AI, incentives, productivity, and how emerging technology may reshape work.",
-    href: "/writings/charting-the-future.pdf",
+    title: "The Outsourced Mind",
+    body: "A research-driven warning on how AI dependence could transform human thinking from independent agency into automated obedience",
+    href: "/writings/the-outsourced-mind.pdf",
+  },
+  {
+    category: "Leadership",
+    label: "Operations Thinking",
+    title: "Execution Under Pressure",
+    body: "Notes on accountability, supervisor development, communication, and translating goals into daily execution.",
+    href: "/writings/execution-under-pressure.pdf",
+  },
+  {
+    category: "Crypto",
+    label: "Digital Assets",
+    title: "Narratives vs. Fundamentals",
+    body: "A research lens for separating durable project value from short-term market attention and hype cycles.",
+    href: "/writings/narratives-vs-fundamentals.pdf",
   },
   {
     category: "AI",
     label: "AI + Society",
-    title: "The Outsourced Mind",
-    body: "A research-driven warning on how AI dependence could transform human thinking from independent agency into automated obedience",
-    href: "/writings/the-outsourced-mind.pdf",
+    title: "Charting the Future",
+    body: "A leadership-focused look at AI, incentives, productivity, and how emerging technology may reshape work.",
+    href: "/writings/charting-the-future.pdf",
   },
   {
     category: "Market Analysis",
@@ -214,20 +229,6 @@ const research = [
     title: "Web3 Security 101",
     body: "A practical beginner guide to wallet safety, scams, risk management, and operational security.",
     href: "/writings/web3-security-101.pdf",
-  },
-  {
-    category: "Leadership",
-    label: "Operations Thinking",
-    title: "Execution Under Pressure",
-    body: "Notes on accountability, supervisor development, communication, and translating goals into daily execution.",
-    href: "/writings/execution-under-pressure.pdf",
-  },
-  {
-    category: "Crypto",
-    label: "Digital Assets",
-    title: "Narratives vs. Fundamentals",
-    body: "A research lens for separating durable project value from short-term market attention and hype cycles.",
-    href: "/writings/narratives-vs-fundamentals.pdf",
   },
 ];
 
