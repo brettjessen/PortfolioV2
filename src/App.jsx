@@ -127,23 +127,23 @@ const projects = [
       "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
     tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
   },
+  //{
+    //title: "Crypto Research Library",
+    //status: "Content system",
+    //problem:
+      //"Crypto research often gets buried in feeds and hype cycles instead of being organized by durable frameworks.",
+    //build:
+      //"A categorized research section for market analysis, project reviews, security education, and AI/Web3 commentary.",
+    //tools: ["Research", "Writing", "Web3", "Education"],
+  //},
   {
-    title: "Crypto Research Library",
-    status: "Content system",
-    problem:
-      "Crypto research often gets buried in feeds and hype cycles instead of being organized by durable frameworks.",
-    build:
-      "A categorized research section for market analysis, project reviews, security education, and AI/Web3 commentary.",
-    tools: ["Research", "Writing", "Web3", "Education"],
-  },
-  {
-    title: "Local Events App",
-    status: "Currently in closed testing",
+    title: "GoQC",
+    status: "Local events app",
     href: "https://play.google.com/apps/internaltest/4701591183248615204",
     problem:
       "No user friendly events aggregator nearby.",
     build:
-      "Prototype automates nearby event aggregation by scrapping the web. Events can also be manually inputted for promotions.",
+      "Automates nearby event aggregation. Events can also be manually inputted for promotions.",
     tools: ["React", "Typescript", "AI", "JS"],
   },
 ];
