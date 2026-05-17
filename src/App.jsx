@@ -127,14 +127,14 @@ const projects = [
       "A UPS-style analytics case study showing KPIs, trends, root-cause categories, and improvement priorities.",
     tools: ["Excel", "SQL", "Power BI", "Process Analysis"],
   },
-  //{
-    //title: "Crypto Research Library",
-    //status: "Content system",
-    //problem:
-      //"Crypto research often gets buried in feeds and hype cycles instead of being organized by durable frameworks.",
-    //build:
-      //"A categorized research section for market analysis, project reviews, security education, and AI/Web3 commentary.",
-    //tools: ["Research", "Writing", "Web3", "Education"],
+  {
+    title: "The Outsourced Mind",
+    status: "Research on AI implementation",
+    problem:
+      "Society is significantly underestimating AI's implementation on society.",
+    build:
+      "A research paper demonstrating why AI needs to be safely implemented to prevent loss of human agency",
+    tools: ["Research", "Writing", "AI", "Education"],
   //},
   {
     title: "GoQC",
@@ -186,6 +186,13 @@ const research = [
     title: "Charting the Future",
     body: "A leadership-focused look at AI, incentives, productivity, and how emerging technology may reshape work.",
     href: "/writings/charting-the-future.pdf",
+  },
+  {
+    category: "AI",
+    label: "AI + Society",
+    title: "The Outsourced Mind",
+    body: "A research-driven warning on how AI dependence could transform human thinking from independent agency into automated obedience",
+    href: "/writings/the-outsourced-mind.pdf",
   },
   {
     category: "Market Analysis",
