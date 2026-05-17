@@ -617,8 +617,8 @@ function ResearchSection() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Research"
-          title="A filterable research library."
-          body="Filter buttons make your writing feel like an organized knowledge base instead of a static article list."
+          title="Article library."
+          body="Browse some of my previous writings."
         />
 
         <div className="mb-8 flex flex-wrap justify-center gap-2">
