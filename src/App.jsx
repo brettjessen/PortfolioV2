@@ -414,8 +414,8 @@ function VisitorSelector() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
       <SectionHeading
-        eyebrow="Choose your lane"
-        title="Different visitors need different proof."
+        eyebrow=""
+        title=""
         body=""
       />
 
@@ -473,8 +473,8 @@ function ExperienceTimeline() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Experience"
-          title="An interactive career timeline."
-          body="Instead of a static list, each role is framed as challenge, action, result, and transferable skills."
+          title=""
+          body=""
           dark
         />
 
@@ -545,9 +545,9 @@ function ProjectsSection() {
   return (
     <section id="projects" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
       <SectionHeading
-        eyebrow="Project Examples"
-        title="Here are some of my projects."
-        body="In my free-time I enjoy learning new skills and applying them to real world use cases."
+        eyebrow="Projects"
+        title=""
+        body=""
       />
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -617,8 +617,8 @@ function ResearchSection() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Research"
-          title="Article library."
-          body="Browse some of my previous writings."
+          title=""
+          body=""
         />
 
         <div className="mb-8 flex flex-wrap justify-center gap-2">
@@ -700,8 +700,8 @@ function FloatingContact() {
             <p className="text-sm font-black text-slate-950">Connect with Brett</p>
             <p className="mt-1 text-xs leading-5 text-slate-500">Fast links for email, social profiles, resume, and research.</p>
             <div className="mt-4 grid gap-2">
-              <a href="mailto:jessenbrett01@gmail.com" className="flex items-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white">
-                <Icon name="mail" size={17} /> Email Brett
+              <a href="mailto:jessen.brett@gmail.com" className="flex items-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white">
+                <Icon name="mail" size={17} /> Email
               </a>
               <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl bg-slate-100 px-4 py-3 text-sm font-bold text-slate-800">
                 <Icon name="linkedin" size={17} /> LinkedIn
@@ -887,8 +887,8 @@ function App() {
       <section id="skills" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
         <SectionHeading
           eyebrow="Skills"
-          title="Organized by how people evaluate you."
-          body="The skill set is strongest when grouped by leadership, operations, research, and technical execution."
+          title=""
+          body=""
         />
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -941,7 +941,7 @@ function App() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700">Contact</p>
             <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
-              Interested in a leadership, research, or technical collaboration?
+              Looking forward to hearing from you!
             </h2>
             <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">
             </p>
@@ -950,7 +950,7 @@ function App() {
           <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8">
             <div className="grid gap-3 sm:grid-cols-2">
               <a href="mailto:jessenbrett01@gmail.com" className="flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-800">
-                <Icon name="mail" size={18} /> Email Brett
+                <Icon name="mail" size={18} /> Email
               </a>
 
               <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-5 py-4 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-800">
