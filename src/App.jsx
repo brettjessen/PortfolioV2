@@ -97,6 +97,7 @@ const projects = [
   {
     title: "Human Dividend",
     status: "Concept / nonprofit idea",
+    href: "https://humandividendfoundation.org/",
     problem: "AI and automation may reduce traditional employment and tax bases while increasing productivity concentration.",
     build: "A voluntary contribution and voting mechanism where agents, companies, and platforms can fund human-centered distributions.",
     tools: ["Product Strategy", "Web3", "Governance", "Proof of Humanity"],
