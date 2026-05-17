@@ -135,7 +135,7 @@ const projects = [
     build:
       "A research paper demonstrating why AI needs to be safely implemented to prevent loss of human agency",
     tools: ["Research", "Writing", "AI", "Education"],
-  //},
+  },
   {
     title: "GoQC",
     status: "Local events app",
