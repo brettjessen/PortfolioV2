@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crypto News Radar</title>
+  <style>
+    :root {
+      --bg-0: #070a0f;
+      --bg-1: #0b111a;
+      --panel: rgba(17, 24, 39, 0.84);
+      --panel-strong: rgba(12, 18, 29, 0.94);
+      --panel-soft: rgba(255, 255, 255, 0.045);
+      --border: rgba(255, 255, 255, 0.11);
+      --border-strong: rgba(214, 164, 91, 0.38);
+      --text: #f6efe5;
+      --muted: #a9b0bc;
+      --muted-2: #748092;
+      --accent: #d6a45b;
+      --accent-2: #7dd3fc;
+      --ok: #6ee7b7;
+      --warn: #fbbf24;
+      --error: #fb7185;
+      --info: #93c5fd;
+      --shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --motion: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(214, 164, 91, 0.18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(125, 211, 252, 0.12), transparent 30%),
+        linear-gradient(145deg, var(--bg-0), var(--bg-1));
+      color: var(--text);
+      font-family: var(--font);
+    }
+
+    body {
+      padding: 10px;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-2);
+      outline-offset: 3px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .widget-shell {
+      width: min(100%, 420px);
+      min-width: 280px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+        var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
+
+    .topline {
+      padding: var(--space-5) var(--space-5) var(--space-4);
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(135deg, rgba(214, 164, 91, 0.11), transparent 58%),
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .brand-mark {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(214, 164, 91, 0.32);
+      border-radius: 15px;
+      background:
+        radial-gradient(circle at 35% 25%, rgba(214, 164, 91, 0.42), transparent 35%),
+        rgba(255, 255, 255, 0.045);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+    }
+
+    .title-block {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .eyebrow {
+      margin: 0 0 3px;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.18rem, 5vw, 1.55rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: var(--space-2) 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .icon-button {
+      display: inline-grid;
+      min-width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      transition: transform var(--motion), border-color var(--motion), background var(--motion);
+    }
+
+    .icon-button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(214, 164, 91, 0.45);
+      background: rgba(214, 164, 91, 0.1);
+    }
+
+    .icon-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .control-panel {
+      padding: var(--space-4) var(--space-5);
+      display: grid;
+      gap: var(--space-3);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-2);
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      padding: 10px 12px;
+      min-height: 40px;
+      outline: none;
+      transition: border-color var(--motion), background var(--motion);
+    }
+
+    .search-input::placeholder {
+      color: var(--muted-2);
+    }
+
+    .search-input:focus {
+      border-color: rgba(125, 211, 252, 0.55);
+      background: rgba(255, 255, 255, 0.075);
+    }
+
+    .primary-button,
+    .ghost-button,
+    .article-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      border-radius: var(--radius-sm);
+      transition: transform var(--motion), background var(--motion), border-color var(--motion), color var(--motion);
+      white-space: nowrap;
+    }
+
+    .primary-button {
+      padding: 0 14px;
+      background: linear-gradient(135deg, #e3b46f, #b98235);
+      color: #17110a;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(214, 164, 91, 0.18);
+    }
+
+    .primary-button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: thin;
+    }
+
+    .chip {
+      flex: 0 0 auto;
+      min-height: 31px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      transition: background var(--motion), color var(--motion), border-color var(--motion);
+    }
+
+    .chip:hover {
+      color: var(--text);
+      border-color: rgba(214, 164, 91, 0.35);
+    }
+
+    .chip[aria-pressed="true"] {
+      color: #17110a;
+      border-color: rgba(214, 164, 91, 0.75);
+      background: var(--accent);
+    }
+
+    .signal-card {
+      margin: var(--space-4) var(--space-5) 0;
+      padding: var(--space-4);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(135deg, rgba(214, 164, 91, 0.12), transparent 60%),
+        rgba(255, 255, 255, 0.045);
+    }
+
+    .signal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .signal-title {
+      margin: 0;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 800;
+    }
+
+    .signal-copy {
+      margin: 5px 0 0;
+      font-size: 0.9rem;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .scan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(110, 231, 183, 0.11);
+      color: var(--ok);
+      border: 1px solid rgba(110, 231, 183, 0.24);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: currentColor;
+      box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.45);
+      animation: pulse 1.9s infinite;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+
+    .metric {
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 13px;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 9px;
+    }
+
+    .metric-value {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+    }
+
+    .metric-label {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted-2);
+      font-size: 0.66rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .global-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+      margin: var(--space-3) var(--space-5) 0;
+    }
+
+    .ghost-button {
+      min-height: 38px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .ghost-button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(125, 211, 252, 0.4);
+      background: rgba(125, 211, 252, 0.09);
+    }
+
+    .content-area {
+      padding: var(--space-4) var(--space-5) var(--space-5);
+    }
+
+    .news-list {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .news-card {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(90deg, rgba(214, 164, 91, 0.11), transparent 4px),
+        rgba(255, 255, 255, 0.043);
+      padding: var(--space-4);
+      overflow: hidden;
+      transition: transform var(--motion), border-color var(--motion), background var(--motion);
+    }
+
+    .news-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(214, 164, 91, 0.32);
+      background:
+        linear-gradient(90deg, rgba(214, 164, 91, 0.18), transparent 4px),
+        rgba(255, 255, 255, 0.06);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: var(--space-2);
+      color: var(--muted-2);
+      font-size: 0.7rem;
+      font-weight: 750;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(125, 211, 252, 0.24);
+      background: rgba(125, 211, 252, 0.08);
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .tag.regulation {
+      border-color: rgba(251, 191, 36, 0.28);
+      background: rgba(251, 191, 36, 0.09);
+      color: var(--warn);
+    }
+
+    .tag.security {
+      border-color: rgba(251, 113, 133, 0.28);
+      background: rgba(251, 113, 133, 0.09);
+      color: var(--error);
+    }
+
+    .tag.market {
+      border-color: rgba(110, 231, 183, 0.25);
+      background: rgba(110, 231, 183, 0.08);
+      color: var(--ok);
+    }
+
+    .article-title {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+    }
+
+    .article-source {
+      margin: var(--space-2) 0 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+
+    .article-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+
+    .article-button {
+      min-height: 32px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .article-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(214, 164, 91, 0.4);
+      background: rgba(214, 164, 91, 0.09);
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-5);
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(0, 0, 0, 0.13);
+      font-size: 0.72rem;
+      line-height: 1.35;
+    }
+
+    .status-message {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .status-light {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      background: var(--info);
+    }
+
+    .status-bar[data-tone="ok"] .status-light {
+      background: var(--ok);
+    }
+
+    .status-bar[data-tone="warn"] .status-light {
+      background: var(--warn);
+    }
+
+    .status-bar[data-tone="error"] .status-light {
+      background: var(--error);
+    }
+
+    .timestamp {
+      color: var(--muted-2);
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+    }
+
+    .empty-state,
+    .error-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.045);
+      padding: var(--space-4);
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-state strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: var(--space-2);
+      letter-spacing: -0.02em;
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .error-panel {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+      border-color: rgba(251, 113, 133, 0.34);
+      background:
+        linear-gradient(135deg, rgba(251, 113, 133, 0.11), transparent 54%),
+        rgba(255, 255, 255, 0.045);
+    }
+
+    .error-panel strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .error-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .error-panel details {
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .error-panel summary {
+      cursor: pointer;
+      color: var(--error);
+      font-weight: 800;
+    }
+
+    .error-panel pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: var(--space-2) 0 0;
+      padding: var(--space-3);
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.22);
+      color: #fda4af;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      line-height: 1.45;
+    }
+
+    .skeleton-card {
+      height: 118px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.075), transparent),
+        rgba(255, 255, 255, 0.04);
+      background-size: 220% 100%;
+      animation: shimmer 1.4s infinite linear;
+    }
+
+    .widget-shell[data-loading="true"] #refreshIcon {
+      animation: spin 850ms linear infinite;
+    }
+
+    @keyframes shimmer {
+      from {
+        background-position: 220% 0;
+      }
+      to {
+        background-position: -220% 0;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.42);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(110, 231, 183, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(110, 231, 183, 0);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 330px) {
+      body {
+        padding: 6px;
+      }
+
+      .topline,
+      .control-panel,
+      .content-area {
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+      }
+
+      .signal-card,
+      .global-actions {
+        margin-left: var(--space-4);
+        margin-right: var(--space-4);
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .global-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .status-bar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .timestamp {
+        white-space: normal;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="widget-shell" id="widgetShell" aria-label="Crypto News Radar widget">
+    <header class="topline">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">BJ</div>
+        <div class="title-block">
+          <p class="eyebrow">Digital Assets Monitor</p>
+          <h1>Crypto News Radar</h1>
+          <p class="subtitle">A compact research scan for market, regulatory, and security headlines.</p>
+        </div>
+        <button class="icon-button" id="refreshBtn" type="button" aria-label="Refresh crypto news">
+          <svg id="refreshIcon" viewBox="0 0 24 24" aria-hidden="true" fill="none">
+            <path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 4v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="control-panel" aria-label="News scan controls">
+      <form class="search-row" id="searchForm" role="search">
+        <label class="sr-only" for="queryInput">Search crypto topic, token, or protocol</label>
+        <input
+          class="search-input"
+          id="queryInput"
+          type="search"
+          maxlength="80"
+          autocomplete="off"
+          placeholder="Search topic, token, protocol"
+          aria-describedby="searchHelp"
+        />
+        <button class="primary-button" type="submit">Scan</button>
+      </form>
+      <div class="sr-only" id="searchHelp">Enter a crypto-related topic, token, or protocol and scan recent news.</div>
+
+      <nav class="chip-row" aria-label="Preset crypto news scans">
+        <button class="chip" type="button" data-topic="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-topic="bitcoin" aria-pressed="false">Bitcoin</button>
+        <button class="chip" type="button" data-topic="ethereum" aria-pressed="false">Ethereum</button>
+        <button class="chip" type="button" data-topic="defi" aria-pressed="false">DeFi</button>
+        <button class="chip" type="button" data-topic="regulation" aria-pressed="false">Regulation</button>
+        <button class="chip" type="button" data-topic="security" aria-pressed="false">Security</button>
+      </nav>
+    </section>
+
+    <section class="signal-card" aria-label="Current scan summary">
+      <div class="signal-header">
+        <div>
+          <p class="signal-title">Research Signal</p>
+          <p class="signal-copy" id="signalCopy">Ready to scan the latest digital asset headlines.</p>
+        </div>
+        <span class="scan-pill" id="scanPill"><span class="pulse-dot" aria-hidden="true"></span>Live</span>
+      </div>
+
+      <div class="metrics-grid" aria-label="Scan metrics">
+        <div class="metric">
+          <span class="metric-value" id="metricArticles">—</span>
+          <span class="metric-label">Articles</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value" id="metricSources">—</span>
+          <span class="metric-label">Sources</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value" id="metricRisk">—</span>
+          <span class="metric-label">Risk Flags</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="global-actions" aria-label="Primary article actions">
+      <button class="ghost-button" id="openTopBtn" type="button" disabled>Open source</button>
+      <button class="ghost-button" id="shareTopBtn" type="button" disabled>Share lead</button>
+    </section>
+
+    <section class="content-area">
+      <section class="error-panel" id="errorPanel" role="alert" hidden>
+        <div>
+          <strong id="errorHeadline">News scan failed</strong>
+          <p id="errorCause">The widget could not load the latest articles.</p>
+        </div>
+        <details id="errorDetails">
+          <summary>Technical detail</summary>
+          <pre id="errorDetailText"></pre>
+        </details>
+        <button class="ghost-button" id="retryBtn" type="button">Retry scan</button>
+      </section>
+
+      <section class="empty-state" id="emptyState" hidden>
+        <strong>No articles found</strong>
+        <p>Try a broader preset like All, Bitcoin, or Regulation, then refresh the scan.</p>
+      </section>
+
+      <section class="news-list" id="newsList" aria-label="Latest crypto news articles"></section>
+    </section>
+
+    <footer class="status-bar" id="statusBar" data-tone="info">
+      <span class="status-message" role="status" aria-live="polite">
+        <span class="status-light" aria-hidden="true"></span>
+        <span id="statusText">Idle. Ready to scan.</span>
+      </span>
+      <span class="timestamp" id="lastUpdated">Not scanned</span>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const GDELT_BASE = "https://api.gdeltproject.org/api/v2/doc/doc";
+      const CORS_PROXY_BASE = "https://api.allorigins.win/raw?url=";
+      const MAX_RECORDS = 14;
+      const REQUEST_TIMEOUT_MS = 9000;
+      const CACHE_KEY = "htwind.cryptoNewsRadar.v1";
+      const CORE_SCOPE = "(crypto OR cryptocurrency OR blockchain OR bitcoin OR ethereum)";
+
+      const TOPIC_QUERIES = Object.freeze({
+        all: "(bitcoin OR cryptocurrency OR ethereum OR crypto OR blockchain)",
+        bitcoin: "(bitcoin OR BTC OR \"spot bitcoin ETF\")",
+        ethereum: "(ethereum OR ETH OR \"Ethereum ETF\" OR \"layer 2\")",
+        defi: "(DeFi OR \"decentralized finance\" OR DEX OR \"lending protocol\" OR \"liquid staking\")",
+        regulation: "(\"crypto regulation\" OR SEC OR MiCA OR stablecoin OR lawsuit OR Treasury)",
+        security: "(\"crypto hack\" OR exploit OR vulnerability OR breach OR scam OR phishing)"
+      });
+
+      const elements = {
+        shell: document.getElementById("widgetShell"),
+        refreshBtn: document.getElementById("refreshBtn"),
+        searchForm: document.getElementById("searchForm"),
+        queryInput: document.getElementById("queryInput"),
+        chips: Array.from(document.querySelectorAll(".chip")),
+        signalCopy: document.getElementById("signalCopy"),
+        scanPill: document.getElementById("scanPill"),
+        metricArticles: document.getElementById("metricArticles"),
+        metricSources: document.getElementById("metricSources"),
+        metricRisk: document.getElementById("metricRisk"),
+        openTopBtn: document.getElementById("openTopBtn"),
+        shareTopBtn: document.getElementById("shareTopBtn"),
+        newsList: document.getElementById("newsList"),
+        emptyState: document.getElementById("emptyState"),
+        errorPanel: document.getElementById("errorPanel"),
+        errorHeadline: document.getElementById("errorHeadline"),
+        errorCause: document.getElementById("errorCause"),
+        errorDetails: document.getElementById("errorDetails"),
+        errorDetailText: document.getElementById("errorDetailText"),
+        retryBtn: document.getElementById("retryBtn"),
+        statusBar: document.getElementById("statusBar"),
+        statusText: document.getElementById("statusText"),
+        lastUpdated: document.getElementById("lastUpdated")
+      };
+
+      let activeTopic = "all";
+      let latestArticles = [];
+      let inFlight = false;
+
+      function setStatus(message, tone = "info") {
+        const safeTone = ["info", "ok", "warn", "error"].includes(tone) ? tone : "info";
+        elements.statusText.textContent = message;
+        elements.statusBar.dataset.tone = safeTone;
+      }
+
+      function setLoading(isLoading) {
+        inFlight = isLoading;
+        elements.shell.dataset.loading = String(isLoading);
+        elements.refreshBtn.disabled = isLoading;
+        elements.searchForm.querySelector("button").disabled = isLoading;
+        elements.queryInput.disabled = isLoading;
+        elements.chips.forEach((chip) => {
+          chip.disabled = isLoading;
+        });
+      }
+
+      function showError(headline, cause, detail) {
+        elements.errorHeadline.textContent = headline;
+        elements.errorCause.textContent = cause;
+        if (detail) {
+          elements.errorDetails.hidden = false;
+          elements.errorDetailText.textContent = detail;
+        } else {
+          elements.errorDetails.hidden = true;
+          elements.errorDetailText.textContent = "";
+        }
+        elements.errorPanel.hidden = false;
+      }
+
+      function clearError() {
+        elements.errorPanel.hidden = true;
+        elements.errorDetailText.textContent = "";
+      }
+
+      function normalizeSearchInput(value) {
+        return String(value || "")
+          .replace(/[^a-zA-Z0-9\s"'._:+-]/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 80);
+      }
+
+      function buildCurrentQuery() {
+        const custom = normalizeSearchInput(elements.queryInput.value);
+        if (custom.length > 0) {
+          return `(${custom}) AND ${CORE_SCOPE}`;
+        }
+        return TOPIC_QUERIES[activeTopic] || TOPIC_QUERIES.all;
+      }
+
+      function buildEndpoint(query) {
+        const url = new URL(GDELT_BASE);
+        url.search = new URLSearchParams({
+          query,
+          mode: "ArtList",
+          format: "json",
+          maxrecords: String(MAX_RECORDS),
+          sort: "HybridRel",
+          timespan: "24h"
+        }).toString();
+        return url.toString();
+      }
+
+      async function fetchTextWithTimeout(url, timeoutMs) {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+          const response = await fetch(url, {
+            method: "GET",
+            cache: "no-store",
+            signal: controller.signal,
+            headers: {
+              "Accept": "application/json,text/plain,*/*"
+            }
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status} ${response.statusText}`.trim());
+          }
+
+          return await response.text();
+        } catch (error) {
+          if (error && error.name === "AbortError") {
+            throw new Error("The news request timed out before the source responded.");
+          }
+          throw error;
+        } finally {
+          window.clearTimeout(timer);
+        }
+      }
+
+      async function fetchGdeltJson(endpoint) {
+        const attempts = [
+          { label: "GDELT direct", url: endpoint },
+          { label: "CORS fallback", url: CORS_PROXY_BASE + encodeURIComponent(endpoint) }
+        ];
+
+        let lastError = null;
+
+        for (const attempt of attempts) {
+          try {
+            const text = await fetchTextWithTimeout(attempt.url, REQUEST_TIMEOUT_MS);
+            if (!text.trim()) {
+              throw new Error(`${attempt.label} returned an empty response.`);
+            }
+
+            try {
+              return JSON.parse(text);
+            } catch (parseError) {
+              const detail = text.slice(0, 500);
+              const error = new Error(`${attempt.label} returned data that was not valid JSON.`);
+              error.detail = detail;
+              throw error;
+            }
+          } catch (error) {
+            lastError = error;
+          }
+        }
+
+        const finalError = new Error("Unable to load the news feed after direct and fallback attempts.");
+        finalError.detail = lastError && (lastError.detail || lastError.message) ? String(lastError.detail || lastError.message) : "";
+        throw finalError;
+      }
+
+      function parseGdeltDate(value) {
+        if (!value) return null;
+
+        const text = String(value).trim();
+
+        if (/^\d{14}$/.test(text)) {
+          const iso = `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}T${text.slice(8, 10)}:${text.slice(10, 12)}:${text.slice(12, 14)}Z`;
+          const date = new Date(iso);
+          return Number.isNaN(date.getTime()) ? null : date;
+        }
+
+        if (/^\d{8}$/.test(text)) {
+          const iso = `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}T00:00:00Z`;
+          const date = new Date(iso);
+          return Number.isNaN(date.getTime()) ? null : date;
+        }
+
+        const parsed = new Date(text);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+      }
+
+      function formatAge(date) {
+        if (!date) return "recent";
+        const diffMs = Date.now() - date.getTime();
+        if (diffMs < 0) return "just now";
+
+        const minutes = Math.floor(diffMs / 60000);
+        if (minutes < 1) return "just now";
+        if (minutes < 60) return `${minutes}m ago`;
+
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours}h ago`;
+
+        const days = Math.floor(hours / 24);
+        return `${days}d ago`;
+      }
+
+      function formatClock(date) {
+        if (!date) return "Not scanned";
+        return new Intl.DateTimeFormat(undefined, {
+          hour: "numeric",
+          minute: "2-digit"
+        }).format(date);
+      }
+
+      function getSafeUrl(value) {
+        try {
+          const url = new URL(String(value || ""));
+          if (url.protocol !== "http:" && url.protocol !== "https:") return null;
+          return url.toString();
+        } catch {
+          return null;
+        }
+      }
+
+      function getDomain(url, fallbackDomain) {
+        if (fallbackDomain) {
+          return String(fallbackDomain).replace(/^www\./i, "").trim();
+        }
+
+        try {
+          return new URL(url).hostname.replace(/^www\./i, "");
+        } catch {
+          return "source";
+        }
+      }
+
+      function classifyArticle(title) {
+        const text = String(title || "").toLowerCase();
+
+        if (/(hack|exploit|breach|vulnerability|phishing|scam|stolen|drain)/i.test(text)) {
+          return { label: "Security", className: "security" };
+        }
+
+        if (/(sec|regulat|lawsuit|court|treasury|senate|mica|stablecoin bill|cftc)/i.test(text)) {
+          return { label: "Regulation", className: "regulation" };
+        }
+
+        if (/(etf|price|market|trading|rally|selloff|liquidation|fund flow)/i.test(text)) {
+          return { label: "Market", className: "market" };
+        }
+
+        if (/(defi|dex|staking|protocol|bridge|layer 2|rollup|validator)/i.test(text)) {
+          return { label: "Protocol", className: "" };
+        }
+
+        return { label: "Crypto", className: "" };
+      }
+
+      function normalizeArticle(item) {
+        const url = getSafeUrl(item.url || item.url_mobile);
+        const title = String(item.title || "").replace(/\s+/g, " ").trim();
+
+        if (!url || !title) return null;
+
+        const seenAt = parseGdeltDate(item.seendate);
+        const domain = getDomain(url, item.domain);
+        const classification = classifyArticle(title);
+
+        return {
+          title,
+          url,
+          domain,
+          seenAt,
+          age: formatAge(seenAt),
+          country: String(item.sourcecountry || "").trim(),
+          language: String(item.language || "").trim(),
+          tag: classification.label,
+          tagClass: classification.className
+        };
+      }
+
+      function dedupeArticles(articles) {
+        const seen = new Set();
+        const unique = [];
+
+        for (const article of articles) {
+          const key = article.url.toLowerCase();
+          if (!seen.has(key)) {
+            seen.add(key);
+            unique.push(article);
+          }
+        }
+
+        return unique;
+      }
+
+      function countRiskFlags(articles) {
+        return articles.filter((article) => {
+          return /(hack|exploit|breach|lawsuit|sec|regulat|ban|scam|phishing|sanction|stolen|vulnerability)/i.test(article.title);
+        }).length;
+      }
+
+      function updateSummary(articles) {
+        const sourceCount = new Set(articles.map((article) => article.domain)).size;
+        const riskCount = countRiskFlags(articles);
+
+        elements.metricArticles.textContent = String(articles.length);
+        elements.metricSources.textContent = String(sourceCount);
+        elements.metricRisk.textContent = String(riskCount);
+
+        if (articles.length === 0) {
+          elements.signalCopy.textContent = "No fresh headlines matched this scan. Broaden the topic or refresh.";
+          elements.openTopBtn.disabled = true;
+          elements.shareTopBtn.disabled = true;
+          return;
+        }
+
+        const lead = articles[0];
+        const riskCopy = riskCount > 0
+          ? `${riskCount} risk-sensitive headline${riskCount === 1 ? "" : "s"} detected.`
+          : "No major risk flags detected in the current scan.";
+
+        elements.signalCopy.textContent = `${articles.length} fresh headline${articles.length === 1 ? "" : "s"} across ${sourceCount} source${sourceCount === 1 ? "" : "s"}. Lead: ${lead.tag}. ${riskCopy}`;
+        elements.openTopBtn.disabled = false;
+        elements.shareTopBtn.disabled = false;
+      }
+
+      function renderSkeletons() {
+        elements.emptyState.hidden = true;
+        elements.newsList.replaceChildren();
+
+        for (let index = 0; index < 4; index += 1) {
+          const card = document.createElement("div");
+          card.className = "skeleton-card";
+          card.setAttribute("aria-hidden", "true");
+          elements.newsList.appendChild(card);
+        }
+      }
+
+      function renderEmpty() {
+        elements.newsList.replaceChildren();
+        elements.emptyState.hidden = false;
+        updateSummary([]);
+      }
+
+      function renderArticles(articles) {
+        elements.emptyState.hidden = true;
+        elements.newsList.replaceChildren();
+
+        const fragment = document.createDocumentFragment();
+
+        articles.forEach((article, index) => {
+          fragment.appendChild(createArticleCard(article, index));
+        });
+
+        elements.newsList.appendChild(fragment);
+        updateSummary(articles);
+      }
+
+      function createArticleCard(article, index) {
+        const card = document.createElement("article");
+        card.className = "news-card";
+        card.setAttribute("aria-labelledby", `news-title-${index}`);
+
+        const meta = document.createElement("div");
+        meta.className = "article-meta";
+
+        const tag = document.createElement("span");
+        tag.className = article.tagClass ? `tag ${article.tagClass}` : "tag";
+        tag.textContent = article.tag;
+
+        const age = document.createElement("span");
+        age.textContent = article.age;
+
+        const source = document.createElement("span");
+        source.textContent = article.domain;
+
+        meta.append(tag, document.createTextNode("•"), age, document.createTextNode("•"), source);
+
+        if (article.country) {
+          const country = document.createElement("span");
+          country.textContent = article.country;
+          meta.append(document.createTextNode("•"), country);
+        }
+
+        const title = document.createElement("h2");
+        title.className = "article-title";
+        title.id = `news-title-${index}`;
+        title.textContent = article.title;
+
+        const sourceLine = document.createElement("p");
+        sourceLine.className = "article-source";
+        sourceLine.textContent = `Source: ${article.domain}${article.language ? ` · ${article.language}` : ""}`;
+
+        const actions = document.createElement("div");
+        actions.className = "article-actions";
+
+        const openButton = document.createElement("button");
+        openButton.className = "article-button";
+        openButton.type = "button";
+        openButton.textContent = "Open source";
+        openButton.setAttribute("aria-label", `Open source article: ${article.title}`);
+        openButton.addEventListener("click", () => openArticle(article));
+
+        const shareButton = document.createElement("button");
+        shareButton.className = "article-button";
+        shareButton.type = "button";
+        shareButton.textContent = "Share";
+        shareButton.setAttribute("aria-label", `Share article: ${article.title}`);
+        shareButton.addEventListener("click", () => shareArticle(article));
+
+        actions.append(openButton, shareButton);
+        card.append(meta, title, sourceLine, actions);
+
+        return card;
+      }
+
+      function openArticle(article) {
+        const opened = window.open(article.url, "_blank", "noopener,noreferrer");
+
+        if (opened) {
+          setStatus(`Opened ${article.domain}.`, "ok");
+          return;
+        }
+
+        setStatus("The host blocked the new window. Use Share to copy the source link.", "warn");
+      }
+
+      async function shareArticle(article) {
+        const shareText = `${article.title}\n${article.url}\n\nSource: ${article.domain}`;
+
+        try {
+          if (navigator.share) {
+            await navigator.share({
+              title: article.title,
+              text: `Crypto news source: ${article.domain}`,
+              url: article.url
+            });
+            setStatus("Share sheet opened.", "ok");
+            return;
+          }
+
+          await copyText(shareText);
+          setStatus("Article link copied to clipboard.", "ok");
+        } catch (error) {
+          setStatus("Share failed. Try opening the source directly.", "error");
+        }
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.top = "-1000px";
+        textarea.style.left = "-1000px";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        const copied = document.execCommand("copy");
+        textarea.remove();
+
+        if (!copied) {
+          throw new Error("Clipboard fallback failed.");
+        }
+      }
+
+      function saveCache(articles) {
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            savedAt: Date.now(),
+            activeTopic,
+            query: elements.queryInput.value,
+            articles
+          }));
+        } catch {
+          // Some WebView privacy modes may block localStorage. The widget still works without cache.
+        }
+      }
+
+      function loadCache() {
+        try {
+          const raw = localStorage.getItem(CACHE_KEY);
+          if (!raw) return false;
+
+          const cached = JSON.parse(raw);
+          if (!cached || !Array.isArray(cached.articles) || cached.articles.length === 0) return false;
+
+          latestArticles = cached.articles;
+          renderArticles(latestArticles);
+          elements.lastUpdated.textContent = cached.savedAt ? `Cached ${formatClock(new Date(cached.savedAt))}` : "Cached";
+          setStatus("Loaded cached headlines. Refresh for current news.", "warn");
+          return true;
+        } catch {
+          return false;
+        }
+      }
+
+      async function loadNews(options = {}) {
+        const manual = Boolean(options.manual);
+
+        if (inFlight) {
+          setStatus("A scan is already running. Wait for it to finish.", "warn");
+          return;
+        }
+
+        clearError();
+        setLoading(true);
+
+        if (latestArticles.length === 0) {
+          renderSkeletons();
+        }
+
+        const query = buildCurrentQuery();
+        const endpoint = buildEndpoint(query);
+
+        setStatus(manual ? "Running fresh news scan..." : "Loading latest crypto headlines...", "info");
+
+        try {
+          const payload = await fetchGdeltJson(endpoint);
+          const rawArticles = Array.isArray(payload.articles) ? payload.articles : [];
+          const articles = dedupeArticles(rawArticles.map(normalizeArticle).filter(Boolean)).slice(0, MAX_RECORDS);
+
+          latestArticles = articles;
+
+          if (articles.length === 0) {
+            renderEmpty();
+            setStatus("Scan completed, but no matching headlines were found.", "warn");
+          } else {
+            renderArticles(articles);
+            saveCache(articles);
+            setStatus(`Scan complete: ${articles.length} headline${articles.length === 1 ? "" : "s"} loaded.`, "ok");
+          }
+
+          elements.lastUpdated.textContent = `Updated ${formatClock(new Date())}`;
+        } catch (error) {
+          const detail = error && (error.detail || error.message) ? String(error.detail || error.message) : "";
+          const hasCache = latestArticles.length > 0;
+
+          if (hasCache) {
+            renderArticles(latestArticles);
+            showError(
+              "Fresh scan failed",
+              "Showing the most recent cached headlines. Check connection, then retry.",
+              detail
+            );
+            setStatus("Fresh scan failed. Cached results remain visible.", "error");
+          } else {
+            renderEmpty();
+            showError(
+              "News scan failed",
+              "The widget could not reach the public news source or fallback route.",
+              detail
+            );
+            setStatus("News scan failed. Retry when your connection is stable.", "error");
+          }
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      function setActiveTopic(topic) {
+        activeTopic = TOPIC_QUERIES[topic] ? topic : "all";
+        elements.queryInput.value = "";
+
+        elements.chips.forEach((chip) => {
+          const isActive = chip.dataset.topic === activeTopic;
+          chip.setAttribute("aria-pressed", String(isActive));
+        });
+      }
+
+      function markCustomSearchActive() {
+        elements.chips.forEach((chip) => {
+          chip.setAttribute("aria-pressed", "false");
+        });
+      }
+
+      function wireEvents() {
+        elements.refreshBtn.addEventListener("click", () => loadNews({ manual: true }));
+        elements.retryBtn.addEventListener("click", () => loadNews({ manual: true }));
+
+        elements.openTopBtn.addEventListener("click", () => {
+          if (latestArticles[0]) openArticle(latestArticles[0]);
+        });
+
+        elements.shareTopBtn.addEventListener("click", () => {
+          if (latestArticles[0]) shareArticle(latestArticles[0]);
+        });
+
+        elements.searchForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const cleaned = normalizeSearchInput(elements.queryInput.value);
+
+          if (!cleaned) {
+            setActiveTopic("all");
+          } else {
+            elements.queryInput.value = cleaned;
+            markCustomSearchActive();
+          }
+
+          loadNews({ manual: true });
+        });
+
+        elements.chips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            setActiveTopic(chip.dataset.topic);
+            loadNews({ manual: true });
+          });
+        });
+      }
+
+      function init() {
+        wireEvents();
+        const hadCache = loadCache();
+
+        if (!hadCache) {
+          elements.metricArticles.textContent = "0";
+          elements.metricSources.textContent = "0";
+          elements.metricRisk.textContent = "0";
+        }
+
+        loadNews({ manual: false });
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
