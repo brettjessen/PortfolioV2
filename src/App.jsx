@@ -120,7 +120,7 @@ const projects = [
   {
   title: "Crypto News",
   status: "Crypto news aggregator widget",
-  href: "/projects/crypto-news-widget/crypto.html",
+  href: "/projects/crypto-news-widget/",
   problem:
     "24/7 news from multiple sources makes it difficult to stay current on narratives.",
   build:
