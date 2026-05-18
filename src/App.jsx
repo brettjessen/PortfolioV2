@@ -118,6 +118,16 @@ const projects = [
   tools: ["HTML", "CSS", "JavaScript", "Operations", "Simulation Design"],
   },
   {
+  title: "Crypto News",
+  status: "Crypto news aggregator widget",
+  href: "/projects/crypto-news-widget/",
+  problem:
+    "24/7 news from multiple sources makes it difficult to stay current on narratives.",
+  build:
+    "HTWind widget to search, filter, open, or share current news articles from countless sources.",
+  tools: ["HTWind", "CSS", "JavaScript", "APIs", "CORS Fallback"],
+  },
+  {
     title: "Human Dividend",
     status: "Concept / nonprofit idea",
     href: "https://humandividendfoundation.org/",
@@ -147,7 +157,7 @@ const projects = [
       "A research paper demonstrating why AI needs to be safely implemented to prevent loss of human agency",
     tools: ["Research", "Writing", "AI", "Education"],
   },
-    {
+  {
     title: "Operations Data Dashboard",
     status: "Portfolio direction",
     href: "/operations-dashboard.html",
