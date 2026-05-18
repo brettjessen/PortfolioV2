@@ -108,6 +108,16 @@ const experience = [
 
 const projects = [
   {
+  title: "UPS Sort Simulator",
+  status: "Playable browser game",
+  href: "/projects/ups-sort-simulator/",
+  problem:
+    "Supervisors need to make fast operational decisions while balancing safety, service, productivity, morale, and required tasks.",
+  build:
+    "A browser-based operations simulator where each decision advances the clock and affects performance metrics during a simulated sort.",
+  tools: ["HTML", "CSS", "JavaScript", "Operations", "Simulation Design"],
+  },
+  {
     title: "Human Dividend",
     status: "Concept / nonprofit idea",
     href: "https://humandividendfoundation.org/",
@@ -562,62 +572,84 @@ function ProjectsSection() {
     <section id="projects" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
       <SectionHeading
         eyebrow="Projects"
-        title=""
-        body=""
+        title="Selected Work & Playable Projects"
+        body="A mix of operations, research, automation, and interactive tools that show how ideas move from concept to execution."
       />
 
       <div className="grid gap-5 md:grid-cols-2">
-        {projects.map((project, index) => (
-          <motion.article
-            key={project.title}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.35, delay: index * 0.05 }}
-            onClick={() => {
-              if (!project.href) return;
-              if (project.href.startsWith("http")) {
-                window.open(project.href, "_blank", "noopener,noreferrer");
-              } else {
-                window.location.href = project.href;
-              }
-            }}
-            className={`rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-900/10 ${
-              project.href ? "cursor-pointer" : ""
-            }`}
-          >
-            <div className="mb-5 flex items-start justify-between gap-4">
-              <div>
-                <p className="inline-block rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-                  {project.status}
+        {projects.map((project, index) => {
+          const isExternal = project.href?.startsWith("http");
+
+          return (
+            <motion.a
+              key={project.title}
+              href={project.href || "#projects"}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noreferrer" : undefined}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
+              className="block rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-900/10"
+            >
+              <div className="mb-5 flex items-start justify-between gap-4">
+                <div>
+                  <p className="inline-block rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                    {project.status}
+                  </p>
+                  <h3 className="mt-4 text-2xl font-black tracking-tight text-slate-950">
+                    {project.title}
+                  </h3>
+                </div>
+
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-blue-800">
+                  <Icon name="spark" size={22} />
+                </div>
+              </div>
+
+              <div className="grid gap-3">
+                <div className="rounded-2xl bg-slate-50 p-4">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">
+                    Problem
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-slate-700">
+                    {project.problem}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-blue-50 p-4">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-700">
+                    What I built
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-slate-700">
+                    {project.build}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+
+              {project.href && (
+                <p className="mt-5 text-sm font-bold text-blue-800">
+                  {project.href.includes("ups-sort-simulator")
+                    ? "Play Simulator →"
+                    : isExternal
+                    ? "Open Project →"
+                    : "View Project →"}
                 </p>
-                <h3 className="mt-4 text-2xl font-black tracking-tight text-slate-950">{project.title}</h3>
-              </div>
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-blue-800">
-                <Icon name="spark" size={22} />
-              </div>
-            </div>
-
-            <div className="grid gap-3">
-              <div className="rounded-2xl bg-slate-50 p-4">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">Problem</p>
-                <p className="mt-2 text-sm leading-6 text-slate-700">{project.problem}</p>
-              </div>
-              <div className="rounded-2xl bg-blue-50 p-4">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-700">What I built / would build</p>
-                <p className="mt-2 text-sm leading-6 text-slate-700">{project.build}</p>
-              </div>
-            </div>
-
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.tools.map((tool) => (
-                <span key={tool} className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600">
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </motion.article>
-        ))}
+              )}
+            </motion.a>
+          );
+        })}
       </div>
     </section>
   );
