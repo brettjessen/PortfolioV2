@@ -1,40 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Crypto News</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto News Widget | Brett Jessen</title>
   <style>
     :root {
-      --bg-0: #070a0f;
-      --bg-1: #0b111a;
-      --panel: rgba(17, 24, 39, 0.84);
-      --panel-strong: rgba(12, 18, 29, 0.94);
-      --panel-soft: rgba(255, 255, 255, 0.045);
-      --border: rgba(255, 255, 255, 0.11);
-      --border-strong: rgba(214, 164, 91, 0.38);
-      --text: #f6efe5;
-      --muted: #a9b0bc;
-      --muted-2: #748092;
-      --accent: #d6a45b;
-      --accent-2: #7dd3fc;
-      --ok: #6ee7b7;
-      --warn: #fbbf24;
-      --error: #fb7185;
-      --info: #93c5fd;
-      --shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-      --space-1: 4px;
-      --space-2: 8px;
-      --space-3: 12px;
-      --space-4: 16px;
-      --space-5: 20px;
-      --space-6: 24px;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --text: #030712;
+      --muted: #4b5563;
+      --blue: #174ea6;
+      --blue-soft: #eef5ff;
+      --line: #e5e7eb;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.11);
+      --radius: 28px;
       --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      --motion: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(23, 78, 166, 0.09), transparent 34%),
+        linear-gradient(180deg, #ffffff, var(--bg));
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 28px;
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+      align-items: end;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(2.4rem, 7vw, 5.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      line-height: 1.7;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #374151;
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+      gap: 28px;
+      align-items: start;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .writeup {
+      display: grid;
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+    }
+
+    .info-card.accent {
+      background: var(--blue-soft);
+      border-color: #dbeafe;
+    }
+
+    .label {
+      margin: 0 0 10px;
+      color: #64748b;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .label.blue {
+      color: var(--blue);
+    }
+
+    .copy {
+      margin: 0;
+      color: #374151;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .widget-frame-wrap {
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(23, 78, 166, 0.12), transparent 35%),
+        #eef3fb;
+      border: 1px solid #dbe3ef;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 430px;
+      height: 760px;
+      border: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 55px rgba(15, 23, 42, 0.24);
+      background: #070a0f;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: #111827;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .panel {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      iframe {
+        height: 720px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page {
+        width: min(100% - 20px, 1120px);
+        padding-top: 28px;
+      }
+
+      .panel {
+        padding: 14px;
+        border-radius: 22px;
+      }
+
+      .widget-frame-wrap {
+        padding: 10px;
+      }
+
+      iframe {
+        height: 690px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="back-link" href="/#projects">← Back to Projects</a>
+
+    <section class="hero">
+      <div>
+        <span class="eyebrow">HTWind · CSS · JavaScript · APIs</span>
+        <h1>Crypto News Widget</h1>
+        <p class="intro">
+          A compact desktop-style news radar for scanning current crypto headlines,
+          filtering market narratives, opening sources, and sharing relevant articles.
+        </p>
+
+        <div class="meta">
+          <span class="pill">HTWind</span>
+          <span class="pill">Single-file HTML</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">GDELT API</span>
+          <span class="pill">CORS fallback</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="writeup">
+        <article class="info-card">
+          <p class="label">Problem</p>
+          <p class="copy">
+            Crypto narratives move quickly across many sources. A lightweight desktop widget
+            makes it easier to monitor headlines without opening a full research dashboard.
+          </p>
+        </article>
+
+        <article class="info-card accent">
+          <p class="label blue">What I built</p>
+          <p class="copy">
+            A standalone HTWind-compatible widget that searches public news data, categorizes
+            headlines, supports refresh/open/share actions, and handles empty, loading, cached,
+            and error states.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <p class="label">Implementation note</p>
+          <p class="copy">
+            The live preview is embedded as an iframe so the widget runs as its own standalone
+            HTML document. This prevents React or Vite from interfering with the widget’s inline
+            JavaScript.
+          </p>
+        </article>
+
+        <div class="actions">
+          <a class="button" href="/widgets/crypto-news-radar.html" target="_blank" rel="noopener noreferrer">
+            Open Standalone Widget
+          </a>
+          <a class="button secondary" href="/#projects">
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+
+      <div class="widget-frame-wrap">
+        <iframe
+          src="/widgets/crypto-news-radar.html"
+          title="Crypto News Radar HTWind Widget"
+        ></iframe>
+      </div>
+    </section>
+  </main>
+</body>
+</html>      --motion: 180ms ease;
     }
 
     * {
